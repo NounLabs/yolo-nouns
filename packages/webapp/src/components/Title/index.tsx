@@ -30,7 +30,7 @@ const Title: React.FC<{}> = props => {
     titleText = `Nouns is attempting to settle...`;
     timer = timerSpacer;
   } else if (votingActive) {
-    titleText = `Wannna YOLO into this Noun?`;
+    titleText = `Wannna YOLO this Noun?`;
     //titleText = `Should we mint ${nextNounId % 10 === 0 ? 'these Nouns' : 'this Noun'}?`;
     timer = <BlockCountdownTimer/>;
   } else if (!activeAuction && !votingActive) {
