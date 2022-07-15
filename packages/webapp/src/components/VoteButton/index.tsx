@@ -10,25 +10,27 @@ export enum EMOJI_TYPE {
     like = '👍'
 }
 
+/*
 const voteToEmoji: Record<VOTE_OPTIONS, string> = {
   [VOTE_OPTIONS['voteDislike']]: '👎',
   [VOTE_OPTIONS['voteShrug']]: '🤷‍♂️',
   [VOTE_OPTIONS['voteLike']]: '👍'
 };
+*/
 
 const VoteButton: React.FC<{voteType: VOTE_OPTIONS}> = props => {
-  const activeAuction = useAppSelector(state => state.auction.activeAuction);
+  //const activeAuction = false; //useAppSelector(state => state.auction.activeAuction);
   const currentVote = useAppSelector(state => state.vote.currentVote);
   const wsConnected = useAppSelector(state => state.vote.connected);
   const blockHash = useAppSelector(state => state.block.blockHash);
   const nextNounId = useAppSelector(state => state.noun.nextNounId);
-  const voteCounts = useAppSelector(state => state.vote.voteCounts);
-  const votingBlockHash = useAppSelector(state => state.vote.votingBlockHash);
+  //const voteCounts = useAppSelector(state => state.vote.voteCounts);
+  //const votingBlockHash = useAppSelector(state => state.vote.votingBlockHash);
 
-  const votingActive = useAppSelector(state => state.vote.votingActive);
+  //const votingActive = useAppSelector(state => state.vote.votingActive);
 
   const { voteType } = props;
-  const voteNotSelected = (currentVote !== undefined) && currentVote !== voteType;
+  //const voteNotSelected = (currentVote !== undefined) && currentVote !== voteType;
   const dispatch = useAppDispatch();
   const changeVote = () => {
     if (currentVote || !wsConnected) return;
@@ -37,13 +39,13 @@ const VoteButton: React.FC<{voteType: VOTE_OPTIONS}> = props => {
     dispatch(sendVote({"nounId": nextNounId, "blockhash": blockHash, "vote": voteType}));
   }
 
-  const disabled = voteNotSelected || (!votingActive || activeAuction) || blockHash !== votingBlockHash
+  //disable always for demo
+  const disabled = true;//voteNotSelected || (!votingActive || activeAuction) || blockHash !== votingBlockHash
 
   return (
-      <button className={currentVote === voteType ? clsx(classes.voteButton, classes.selected) : classes.voteButton} onClick={changeVote}
+      <button className={currentVote === voteType ? clsx(classes.bidBtn, classes.selected) : classes.bidBtn} onClick={changeVote}
       disabled={disabled}>
-        <span className={classes.voteEmojiText}> {voteToEmoji[voteType]} </span>
-        <span className={classes.voteText}> {voteCounts[voteType]} </span>
+        <span className={classes.voteText}> YOLO! </span>
       </button>
   );
 };

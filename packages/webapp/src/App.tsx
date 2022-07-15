@@ -8,18 +8,21 @@ import { setNextNounId } from './state/slices/noun';
 import { setBlockAttr } from './state/slices/block';
 import { provider } from './config';
 
+import { Container, Row, Col } from 'react-bootstrap';
+
 import classes from './App.module.css';
+import '../src/css/globals.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import NavBar from './components/NavBar';
 import Noun  from './components/Noun';
 import Title from './components/Title';
 import VoteBar from './components/VoteBar';
-import VoteProgressBar from './components/VoteProgressBar';
+//import VoteProgressBar from './components/VoteProgressBar';
 import Documentation from './components/Documentation';
 import Banner from './components/Banner';
 import Footer from './components/Footer';
-import SettledAuctionModal from './components/SettledAuctionModal';
+//import SettledAuctionModal from './components/SettledAuctionModal';
 
 import { setActiveAccount } from './state/slices/account';
 import { openVoteSocket, markVoterInactive } from './middleware/voteWebsocket';
@@ -69,10 +72,21 @@ function App() {
     <div className={`${classes.App} ${useGreyBg ? classes.bgGrey : classes.bgBeige}`}>
       <NavBar />
       <Title/>
-      <VoteProgressBar/>
-      <SettledAuctionModal/>
-      <Noun />
-      <VoteBar />
+
+      <Container fluid="xl">
+        <Row>
+          <Col lg={{ span: 6 }} className={classes.nounContentCol}>
+		      <Noun />
+          </Col>
+          <Col lg={{ span: 6 }} className={classes.auctionActivityCol}>
+
+		      <VoteBar />
+
+          </Col>
+        </Row>
+      </Container>
+
+
       <Banner />
       <Documentation />
       <Footer/>

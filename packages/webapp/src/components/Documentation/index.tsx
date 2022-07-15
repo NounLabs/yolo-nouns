@@ -4,11 +4,13 @@ import classes from './Documentation.module.css';
 import Accordion from 'react-bootstrap/Accordion';
 import Link from '../Link';
 
-import config from '../../config';
-import { buildEtherscanContractLink } from '../../utils/etherscan';
+//import config from '../../config';
+//import { buildEtherscanContractLink } from '../../utils/etherscan';
 
 
 const Documentation = () => {
+
+  /*
   const fomoDiscourseLink = (
     <Link text="Nouns DAO Discourse" url="https://discourse.nouns.wtf/t/fomo-nouns-force-mint-our-nouns/117" leavesPage={true} />
   );
@@ -18,16 +20,17 @@ const Documentation = () => {
   );
 
   const gitHubLink = (
-    <Link text="FOMO Nouns GitHub" url="https://github.com/fomo-nouns/fomo-nouns" leavesPage={true} />
+    <Link text="YOLO Nouns GitHub" url="https://github.com/NounLabs/yolo-nouns" leavesPage={true} />
   );
 
   const settlementEtherscanLink = buildEtherscanContractLink(config.fomoSettlerAddress);
   const smartContractLink = (
     <Link text="FOMO Settlement Contract" url={settlementEtherscanLink} leavesPage={true} />
   );
+  */
 
   const nounsDaoLink = (
-    <Link text="Nouns DAO" url="https://nouns.wtf" leavesPage={true} />
+    <Link text="Nouns" url="https://nouns.wtf" leavesPage={true} />
   );
 
 
@@ -37,76 +40,43 @@ const Documentation = () => {
         <div className={classes.headerWrapper} id="wtf">
           <h1>WTF?</h1>
           <p>
-            FOMO Nouns is a social project for the {nounsDaoLink} community. Every Noun
-            O'Clock, when the next Noun is chosen, users can watch potential Nouns appear
-            with every block and vote for which one to mint. This happens <i>really</i> fast,
-            so we hope you'll feel the FOMO.
+            YOLO Nouns is an experimental social project for the {nounsDaoLink} community. 
+            In between each Noun that is selected daily, there are “ghost” Nouns that appear with every block and are lost into the ether. Until now. 
+            With YOLO Nouns you can capture each Noun and each moment on-chain, block by block.            
+            This happens <i>really</i> fast, so if you see a Noun you like, be sure to YOLO quickly!
+
           </p>
-          <p>
-            This project was approved as part of Nouns DAO {proposalEightLink} after discussion with
-            the Nouns community on the {fomoDiscourseLink}.
-          </p>
+          
         </div>
         <Accordion flush>
           <Accordion.Item eventKey="0" className={classes.accordionItem}>
             <Accordion.Header className={classes.accordionHeader} id="faq">Summary</Accordion.Header>
             <Accordion.Body>
               <ul>
-                <li>Every 24 hours a Nouns auction ends at Noun O'Clock</li>
-                <li>The auction must be "settled" to start the next auction</li>
-                <li>The block that "settlement" occurs in determines the next Noun</li>
-                <li>FOMO Nouns lets you watch, block by block, the next possible Nouns</li>
-                <li>Vote for Nouns you like, and if enough people agree, we'll try to mint it</li>
-                <li>They change REALLY FAST, so get your votes in quickly</li>
-                <li>A winning Noun can't always be minted if the chain moves too fast. Keep trying!</li>
+                <li>YOLO Nouns lets you watch, block by block, the next possible Noun</li>
+                <li>A new unique Noun is available on every block</li>
+                <li>There's no guarantee that you'll get the Noun due to the speed of blocks</li>
+                <li>Only one YOLO Noun can be minted per block</li>
+                <li>If someone YOLOs into the Noun before you YOLO, your request will be rejected</li>
+                <li>We are not kidding -- these Nouns change REALLY fast, so YOLO quickly!</li>
+                <li>A Noun can't always be minted if the chain moves too fast. Keep trying!</li>
               </ul>
+	              
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="1" className={classes.accordionItem}>
-            <Accordion.Header className={classes.accordionHeader}>Voting</Accordion.Header>
+            <Accordion.Header className={classes.accordionHeader}>We Buy Nouns</Accordion.Header>
             <Accordion.Body>
               <p>
-                After a Nouns auction completes, the community must pick a block to settle the
-                old auction, mint a new Noun, and start the next auction. Every Ethereum block
-                has the potential to mint a different Noun. However, the auction must be settled
-                in that <i>exact</i> block, or the Noun disappears forever. And these new blocks
-                appear every ~13 seconds.
-              </p>
-              <p>
-                We need to gather votes, execute the transaction, and get it mined in the next
-                block <i>all</i> within 13 seconds. This means you only have ~6 seconds to cast
-                your votes. If you miss a great Noun, you may not see it again for another
-                40,393,080 blocks or approximately 17 years.
-              </p>
-              <p>
-                A winning vote is when 60% of the connected users like (👍) a Noun. However, we
-                want to mint only the best Nouns, so you can also dislike (👎) it to subtract one
-                from the score. If 20% of users dislike a Noun, you need every single other
-                user (all 80%) to like it in order to reach to 60% threshold.
+                The goal of YOLO Nouns is to acquire Nouns, and to provide the community with access to the broader Nouns governance model.
               </p>
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="2" className={classes.accordionItem}>
-            <Accordion.Header className={classes.accordionHeader}>Donations</Accordion.Header>
+            <Accordion.Header className={classes.accordionHeader}>YOLO Vibes</Accordion.Header>
             <Accordion.Body>
               <p>
-                Settling the auction requires Ethereum gas fees, which can be expensive. We built 
-                a {smartContractLink} to trustlessly hold donations from the community to help with
-                these settlement expenses. These funds can <i>only</i> be used for settling a Nouns
-                auction, and only {nounsDaoLink} has access to pull funds from the contract.
-              </p>
-              <p>
-                If you see the ETH in the contract is low, please considering donating if you are
-                enjoying the FOMO Nouns experience!
-              </p>
-            </Accordion.Body>
-          </Accordion.Item>
-          <Accordion.Item eventKey="3" className={classes.accordionItem}>
-            <Accordion.Header className={classes.accordionHeader}>Code</Accordion.Header>
-            <Accordion.Body>
-              <p>
-                FOMO Nouns was built entirely in public, and you can find all of the code,
-                architecture, and even deploy the application yourself from our {gitHubLink}.
+                YOLO Nouns is all about vibes, but we are also planning on doing Nounish giveaways and other surprises for the community.
               </p>
             </Accordion.Body>
           </Accordion.Item>

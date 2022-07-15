@@ -38,10 +38,12 @@ const Noun: React.FC = props => {
     data.push({seed, src, alt: `Noun ${nextNounId}`})
 
     // Every 10th Noun, push another Noun
+    /*
     if (nextNounId % 10 === 0){
       const {src, seed} = getNounImage(nextNounId+1, blockhash)
       data.push({seed, src, alt: `Noun ${nextNounId+1}`})
     }
+    */
 
     return data
 

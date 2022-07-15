@@ -2,7 +2,6 @@ button {
     padding: 0;
 }
 
-
 .voteButton{
     display: flex;
     flex-direction: column;
@@ -21,13 +20,47 @@ button {
     box-sizing: border-box;
 }
 
+.bidBtn {
+  font-family: 'PT Root UI';
+  border-radius: 12px !important;
+  margin-left: 0.6rem !important;
+  margin-top: 3px;
+  width: auto;
+  padding: 10px 16px;
+  height: 3rem;
+  color: white;
+  border: transparent;
+  background-color: black;
+  font-weight: bold;
+  letter-spacing: normal;
+  font-size: 19px;
+  transition: all 0.2s ease-in-out;
+}
+
+.bidBtn:disabled {
+  cursor: not-allowed;
+}
+
+.bidBtn:hover,
+.bidBtn:active,
+.bidBtn:focus .bidBtn:disabled {
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: #2125298a;
+}
+
+.bidBtn:disabled {
+  background-color: gray !important;
+}
+
+
 @media (hover: hover) {
     .voteButton:enabled:hover:not(.selected){
         background: rgba(0, 0, 0, 0.1);
     }
 }
 .voteText{
-    font-size: 1em;
+    /*font-size: 1em;*/
     font-weight: bold;
 }
 
@@ -45,7 +78,7 @@ button {
         height: 110px;
     }
     .voteText{
-        font-size: 1.5em;
+        /*font-size: 1.5em;*/
         font-weight: bold;
     }
 

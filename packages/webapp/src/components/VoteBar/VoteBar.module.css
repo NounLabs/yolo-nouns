@@ -29,19 +29,23 @@
 
 .VoteBar {
     display: flex;
-    justify-content: space-evenly;
+    /*justify-content: space-evenly;*/
     gap: 10px;
     width: 30%;
     min-height: 80px;
+    /*
     min-width: 320px;
     padding: .8em;
+    */
+    /*
     border-radius: 20px;
     border: 1px solid #000000;
     box-shadow: 2px 5px 5px 2px rgba(0, 0, 0, 0.25);
-    margin-bottom: 20px;
+    */
+    /*margin-bottom: 20px;*/
 }
 
-.VoteBarOverlay {
+.VoteBarOverlay-x {
     background-color: white;
     opacity: 0.5;
 }
@@ -54,4 +58,27 @@
     font-size: 1.5em;
     font-weight: bold;
     cursor: pointer;
+}
+
+.voteTitle {
+  font-family: 'Londrina Solid';
+  font-size: 4rem;
+  color: black;
+}
+
+.votePriceTitle {
+  font-weight: bold;
+  /*font-family: 'PT Root UI';
+  font-size: 18px;
+  */
+}
+
+.votePriceText {
+  font-weight: bold;
+  /*
+  font-family: 'PT Root UI';
+  font-size: 32px;
+  margin-bottom: 0px !important;
+  margin-top: 3px;
+  */
 }

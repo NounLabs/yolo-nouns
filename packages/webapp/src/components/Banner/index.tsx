@@ -1,22 +1,35 @@
 import classes from './Banner.module.css';
-import lightningNoun from './lightningNoun.png';
-
+import YOLONoun from './YOLONoun.png';
+import { Container, Row, Col } from 'react-bootstrap';
 
 const Banner = () => {
   return (
     <div className={classes.BannerSection}>
-        <div className={classes.textWrapper}>
-          <h1>
-            CAST YOUR VOTE,
-            <br />
-            PICK THE NOUN,
-            <br />
-            RELIEVE FOMO.
-          </h1>
-        </div>
-        <div className={classes.imgWrapper}>
-          <img src={lightningNoun} alt="Lightning Noun" className={classes.img} />
-        </div>
+      <Container fluid="xl">
+		<Row>
+          <Col lg={{ span: 6 }} >
+          
+	        <div className={classes.textWrapper}>
+	          <h1>
+	            EVERY.
+	            <br />
+	            BLOCK.
+	            <br />
+	            FOREVER.
+	          </h1>
+	        </div>
+
+          </Col>
+          <Col lg={{ span: 6 }} >
+	        
+	        <div className={classes.imgWrapper}>
+	          <img src={YOLONoun} alt="YOLO Noun" className={classes.img} />
+	        </div>	
+
+          </Col>
+        </Row>
+      </Container>
+
     </div>
   );
 };

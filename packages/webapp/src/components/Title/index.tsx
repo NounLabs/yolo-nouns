@@ -1,16 +1,16 @@
 import React from "react";
 import { useAppSelector } from "../../hooks";
 import classes from "./Title.module.css";
-import AuctionTimer from '../AuctionTimer';
+//import AuctionTimer from '../AuctionTimer';
 import BlockCountdownTimer from '../BlockCountdownTimer';
 
 const Title: React.FC<{}> = props => {
-  const activeAuction = useAppSelector(state => state.auction.activeAuction);
+  const activeAuction = false; //useAppSelector(state => state.auction.activeAuction);
   const attemptedSettle = useAppSelector(state => state.vote.attemptedSettle);
   const votingActive = useAppSelector(state => state.vote.votingActive);
   const ethereumConnected = useAppSelector(state => state.block.connected);
   const blockHash = useAppSelector(state => state.block.blockHash);
-  const nextNounId = useAppSelector(state => state.noun.nextNounId)!;
+  //const nextNounId = useAppSelector(state => state.noun.nextNounId)!;
 
   let timerSpacer = (<div className={classes.timerSpacer}>&nbsp;</div>);
 
@@ -21,20 +21,23 @@ const Title: React.FC<{}> = props => {
   } else if (!blockHash || activeAuction === undefined) {
     titleText = `Waiting for next block...`;
     timer = timerSpacer;
+  /*
   } else if (activeAuction) {
     titleText = `Come back at Noun O'Clock in:`;
     timer = <AuctionTimer/>;
+  */
   } else if (attemptedSettle) {
-    titleText = `Attempting to settle...`;
+    titleText = `Nouns is attempting to settle...`;
     timer = timerSpacer;
   } else if (votingActive) {
-    titleText = `Should we mint ${nextNounId % 10 === 0 ? 'these Nouns' : 'this Noun'}?`;
+    titleText = `Wannna YOLO into this Noun?`;
+    //titleText = `Should we mint ${nextNounId % 10 === 0 ? 'these Nouns' : 'this Noun'}?`;
     timer = <BlockCountdownTimer/>;
   } else if (!activeAuction && !votingActive) {
-    titleText = `Time's up! Waiting for next block...`;
+    titleText = `YOLO next time? Waiting for next block...`;
     timer = <BlockCountdownTimer/>;
   } else {
-    titleText = 'Loading FOMO Nouns...';
+    titleText = 'Loading YOLO Nouns...';
     timer = <></>;
   }
 

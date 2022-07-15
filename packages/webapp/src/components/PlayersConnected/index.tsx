@@ -10,7 +10,7 @@ const PlayersConnected: React.FC<{}> = props => {
 
   const [showStalePlayers, setShowStalePlayers] = useState(false);
 
-  if (!activeAuction && voteConnected) {
+  if (!activeAuction && voteConnected && false) {
     return (
       <div 
         onClick={() => setShowStalePlayers(!showStalePlayers)}

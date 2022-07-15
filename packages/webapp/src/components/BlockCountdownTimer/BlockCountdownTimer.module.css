@@ -5,13 +5,18 @@
 }
 
 .ActiveVote {
+
+	/*
     background: -webkit-linear-gradient(#fca7f2, #5603AD);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    */
 }
 
 .Threshold {
-    background: -webkit-linear-gradient(#FC5353, #DB1414);
+    color: #ea3628;
+    /*background: -webkit-linear-gradient(#FC5353, #DB1414);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    */
 }
