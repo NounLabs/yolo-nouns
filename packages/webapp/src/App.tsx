@@ -11,8 +11,8 @@ import { provider } from './config';
 import { Container, Row, Col } from 'react-bootstrap';
 
 import classes from './App.module.css';
-import '../src/css/globals.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../src/css/globals.css';
 
 import NavBar from './components/NavBar';
 import Noun  from './components/Noun';

@@ -26,6 +26,7 @@
 
 .nounContentCol {
   display: flex;
+  justify-content: center;
 }
 
 .auctionActivityCol {
@@ -43,8 +44,8 @@
   }
   .auctionActivityCol {
     padding-top: 5%;
-    padding-right: 5%;
-    padding-left: 5%;
+    padding-right: 5% !important;
+    padding-left: 5% !important;
     width: 100%;
     background-color: white;
   }
@@ -56,7 +57,7 @@
     margin-left: unset;
     margin-right: unset;
     padding-bottom: 2rem;
-    padding-top: 2rem;
+    padding-top: 1rem;
     padding-right: unset;
     padding-left: 0;
   }
