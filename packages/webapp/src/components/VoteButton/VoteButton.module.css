@@ -21,20 +21,25 @@ button {
 }
 
 .bidBtn {
-  font-family: 'PT Root UI';
+  /*font-family: 'PT Root UI';*/
   border-radius: 12px !important;
   margin-left: 0.6rem !important;
   margin-top: 3px;
   width: auto;
   padding: 10px 16px;
   height: 3rem;
-  color: white;
   border: transparent;
-  background-color: black;
-  font-weight: bold;
+  font-weight: bolder;
   letter-spacing: normal;
   font-size: 19px;
   transition: all 0.2s ease-in-out;
+  
+  background: #ea3628;
+  color: white;
+  min-width: 300px;
+  
+  border: 1px solid #000000;
+  box-shadow: 2px 5px 5px 2px rgba(0, 0, 0, 0.25);  
 }
 
 .bidBtn:disabled {
@@ -46,7 +51,10 @@ button {
 .bidBtn:focus .bidBtn:disabled {
   outline: none !important;
   box-shadow: none !important;
-  background-color: #2125298a;
+  /*background-color: #2125298a;*/
+  background: white;
+  color: #ea3628;
+  
 }
 
 .bidBtn:disabled {
@@ -79,10 +87,23 @@ button {
     }
     .voteText{
         /*font-size: 1.5em;*/
-        font-weight: bold;
+        font-weight: bolder;
     }
 
     .voteEmojiText{
         font-size: 3em;
     }
+}
+
+@media (max-width: 992px) {
+	.bidBtn {
+	  min-width: 300px;
+	}
+
+}
+
+@media (max-width: 568px) {
+	.bidBtn {
+	  min-width: 200px;
+	}
 }

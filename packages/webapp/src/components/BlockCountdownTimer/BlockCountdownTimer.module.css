@@ -1,7 +1,8 @@
-.Wrapper{
+.Wrapper {
     font-size: 1em;
-    justify-self: center;
+    /*justify-self: center;*/
     font-family: 'Londrina Solid';
+    display: inline;
 }
 
 .ActiveVote {
@@ -13,10 +14,31 @@
     */
 }
 
-.Threshold {
+.ThresholdDanger {
     color: #ea3628;
-    /*background: -webkit-linear-gradient(#FC5353, #DB1414);
+    /*background: -webkit-linear-gradient(#ea3628, #f26522);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     */
+}
+
+.ThresholdWarning {
+    color: #f26522;
+    /*background: -webkit-linear-gradient(#f26522, #ea3628);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    */
+}
+
+
+@media (max-width: 992px) {
+	.Wrapper {
+	    display: block;
+	}
+}
+
+@media (max-width: 568px) {
+	.Wrapper {
+	    display: block;
+	}
 }

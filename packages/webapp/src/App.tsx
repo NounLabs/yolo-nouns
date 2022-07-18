@@ -71,7 +71,7 @@ function App() {
   return (
     <div className={`${classes.App} ${useGreyBg ? classes.bgGrey : classes.bgBeige}`}>
       <NavBar />
-      <Title/>
+      
 
       <Container fluid="xl">
         <Row>
@@ -79,7 +79,7 @@ function App() {
 		      <Noun />
           </Col>
           <Col lg={{ span: 6 }} className={classes.auctionActivityCol}>
-
+				<Title/>
 		      <VoteBar />
 
           </Col>

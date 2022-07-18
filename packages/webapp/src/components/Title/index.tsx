@@ -44,8 +44,7 @@ const Title: React.FC<{}> = props => {
   return (
     <div className={classes.Wrapper}>
       <h1 className={classes.Title}>
-        {titleText}
-        {timer}
+        {titleText} &nbsp; {timer}
       </h1>
     </div>
   )

@@ -31,7 +31,7 @@
     display: flex;
     /*justify-content: space-evenly;*/
     gap: 10px;
-    width: 30%;
+    width: 100%;
     min-height: 80px;
     /*
     min-width: 320px;
@@ -84,13 +84,28 @@
 }
 
 @media (max-width: 992px) {
+	.VoteBar {
+	  justify-content: space-evenly;
+	}
+
+
 	.voteTitle {
 	  font-size: 3rem;
+	  color: white;
 	}
+
+	.votePriceText {
+	  text-align: right;
+	 }	
 }
 
 @media (max-width: 568px) {
 	.voteTitle {
 	  font-size: 3rem;
+	  color: white;
 	}
+
+	.votePriceText {
+	  text-align: right;
+	 }		
 }

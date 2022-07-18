@@ -1,18 +1,36 @@
 .Title{
-    text-align: center;
+    /*text-align: center;*/
     font-family: 'Londrina Solid';
     margin-top: 0.2rem;
     margin-bottom: 0.2rem;
 }
 
 .Wrapper{
-    justify-self: center;
+    /*justify-self: center;*/
     white-space: pre-wrap;
     padding-bottom: 0.5rem;
 }
 
 .TimerSpacer {
     font-size: 1em;
-    justify-self: center;
+    /*justify-self: center;*/
     font-family: 'Londrina Solid';
+}
+
+@media (max-width: 992px) {
+	.Title{
+	    text-align: center;
+	}
+	.Wrapper{
+	    justify-self: center;
+	}
+}
+
+@media (max-width: 568px) {
+	.Title{
+	    text-align: center;
+	}
+	.Wrapper{
+	    justify-self: center;
+	}
 }

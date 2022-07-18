@@ -58,6 +58,21 @@ const VoteBar:React.FC<{}> = (props) => {
 
   return(
   	<div>
+      <Row>
+        <Col lg={12}>
+  
+		  
+		    <div className={`
+		      ${(!votingActive || activeAuction === undefined) ? classes.VoteBarOverlay : ''}
+		      ${classes.VoteBar}`}
+		    >
+		      { (voteSocketConnected && ethereumSocketConnected) ? voteOpts(false)
+		        : !ethereumSocketConnected ? reconnectOpt
+		        : voteReconnectOpt }
+		    </div>  	
+          </Col>
+        </Row>
+  	
         <Row >
           <Col lg={12}>
 
@@ -75,12 +90,12 @@ const VoteBar:React.FC<{}> = (props) => {
           <Col lg={12}>
 
 		    <Row>
-		      <Col xs={5} lg={12} className={classes.leftCol}>
+		      <Col xs={6} lg={6} className={classes.leftCol}>
 		        <h4 className={classes.votePriceTitle}>
 		          Price
 		        </h4>
 		      </Col>
-		      <Col xs="auto" lg={12}>
+		      <Col xs={6} lg={6}>
 		        <h2 className={classes.votePriceText}>
 		          Ξ 0.01
 		        </h2>
@@ -94,16 +109,6 @@ const VoteBar:React.FC<{}> = (props) => {
       
       <Row>
         <Col lg={12}>
-  
-		  
-		    <div className={`
-		      ${(!votingActive || activeAuction === undefined) ? classes.VoteBarOverlay : ''}
-		      ${classes.VoteBar}`}
-		    >
-		      { (voteSocketConnected && ethereumSocketConnected) ? voteOpts(false)
-		        : !ethereumSocketConnected ? reconnectOpt
-		        : voteReconnectOpt }
-		    </div>
 
 			<strong>HOW TO YOLO:</strong>
 			<ul>

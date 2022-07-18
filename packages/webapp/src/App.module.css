@@ -46,8 +46,9 @@
     padding-top: 5%;
     padding-right: 5% !important;
     padding-left: 5% !important;
-    width: 100%;
-    background-color: white;
+    width: 100%;    
+    background: black;
+    color: white;
   }
 }
 
@@ -60,6 +61,8 @@
     padding-top: 1rem;
     padding-right: unset;
     padding-left: 0;
+    background: black;
+    color: white;
   }
 
   .nounWrapper {

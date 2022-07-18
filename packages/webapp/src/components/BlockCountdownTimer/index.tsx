@@ -16,7 +16,7 @@ const BlockCountdownTimer: React.FC<{}> = props => {
 
   useEffect(() => {
     const timeSince = dayjs().valueOf() - blockTime;
-    const timeLeft = 7000 - timeSince; //6000
+    const timeLeft = 13000 - timeSince; //6000
     
     if(timeLeft <= 0) {
       setTimeLeft(0);
@@ -33,11 +33,12 @@ const BlockCountdownTimer: React.FC<{}> = props => {
   const seconds = Math.floor(timerDuration.seconds());
   const ms = Math.floor(timerDuration.milliseconds() / 10);
   
-  const timerThreshold = seconds <= 3;
+  const timerThresholdWarning = (seconds <= 10 && seconds >= 5);
+  const timerThresholdDanger = seconds <= 5;
 
   return(
     <div className={`${classes.Wrapper} ${votingActive ? classes.ActiveVote : ''} 
-    ${timerThreshold ? classes.Threshold: ''}`}>
+    ${timerThresholdWarning ? classes.ThresholdWarning: ''} ${timerThresholdDanger ? classes.ThresholdDanger: ''} `}>
       {seconds}.{ms}
     </div>
   )
