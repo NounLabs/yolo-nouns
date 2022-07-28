@@ -37,6 +37,9 @@ interface Config {
   nounsDaoProxyAddress: string;
   nounsDaoExecutorAddress: string;
   enableHistory: boolean;
+  yoloTokenAddress: string;
+  yoloNounsDescriptor: string;
+  yoloAuctionProxyAddress: string;
 }
 
 const config: Record<SupportedChains, Config> = {
@@ -45,14 +48,24 @@ const config: Record<SupportedChains, Config> = {
     chainId: ChainId.Rinkeby,    
     jsonRpcUri: `https://${createProviderURL('rinkeby')}`,
     wsRpcUri: `wss://${createProviderURL('rinkeby')}`,
+    
     fomoSettlerAddress: '0x6567F8eE62cd129049EE924c7B88a23be7DDaE5c',
-    auctionProxyAddress: '0x7cb0384b923280269b3BD85f0a7fEaB776588382',
-    nounsDescriptor: '0x53cB482c73655D2287AE3282AD1395F82e6a402F',
-    nounsSeeder : '0xA98A1b1Cc4f5746A753167BAf8e0C26AcBe42F2E',
-    tokenAddress: '0x632f34c3aee991b10D4b421Bc05413a03d7a37eB',
+
+    auctionProxyAddress: '0xDAF873A2Ae77D570da094B52A8eC50Ef8885b2c4',
+    nounsDescriptor: '0x8B7Ec9f2ad70C10F4Ba5D352D6691B9BFF2F628b',
+    nounsSeeder : '0x62F257406e9C1752c65d60ADF5D283FEe55C6301',
+    tokenAddress: '0x65dA5EbD09f0C6CA1DFc5EaA5639626ccd5DaD06',
+
     nounsDaoProxyAddress: '0xd1C753D9A23eb5c57e0d023e993B9bd4F5086b04',
     nounsDaoExecutorAddress: '0xd1C753D9A23eb5c57e0d023e993B9bd4F5086b04',
+
     enableHistory: process.env.REACT_APP_ENABLE_HISTORY === 'true' || false,
+    
+
+    yoloTokenAddress: '0x6B582455b4C5322F44216121372D1b9418d0335a',
+    yoloNounsDescriptor: '0xf142d23eb180449676758549aa085c9DbfaB3c4E',
+    yoloAuctionProxyAddress: '0x8242241A0f2911De52Cee2C9321A291Aa7255854',
+    
   },
   [ChainId.Mainnet]: {
     chainName: 'mainnet',
@@ -67,12 +80,34 @@ const config: Record<SupportedChains, Config> = {
     nounsDaoProxyAddress: '0x6f3E6272A167e8AcCb32072d08E0957F9c79223d',
     nounsDaoExecutorAddress: '0x0BC3807Ec262cB779b38D65b38158acC3bfedE10',
     enableHistory: process.env.REACT_APP_ENABLE_HISTORY === 'true' || false,
+    
+    yoloTokenAddress: '0xc92D563Afac62855cc42E70D6CF52976a99a14b1',
+    yoloNounsDescriptor: '0x707C6707ecb006b1c42296856B16eF8F472B130E',
+    yoloAuctionProxyAddress: '0xB74A82e05b18bbBc682282e3a4Faa4a5F50Ad88B',
+    
   },
   [LOCAL_CHAIN_ID]: {
     chainName: 'local',
     chainId: LOCAL_CHAIN_ID,
     jsonRpcUri: 'http://localhost:8545',
     wsRpcUri: 'ws://localhost:8545',
+
+    fomoSettlerAddress: '0xFa7C3ab143074BcbF09db8450810d78E4B9b19a3',
+
+    auctionProxyAddress: '0x610178dA211FEF7D417bC0e6FeD39F05609AD788',
+    nounsDescriptor: '0xcf7ed3acca5a467e9e704c703e8d87f634fb0fc9',
+    nounsSeeder: '0x0165878a594ca255338adfa4d48449f69242eb8f',
+
+    tokenAddress: '0xa513E6E4b8f2a923D98304ec87F64353C4D5C853',
+    nounsDaoProxyAddress: '0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82',
+    nounsDaoExecutorAddress: '0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e',    
+    enableHistory: false,
+    
+    yoloTokenAddress: '0x4ed7c70f96b99c776995fb64377f0d4ab3b0e1c1',
+    yoloNounsDescriptor: '0x59b670e9fa9d0a427751af201d676719a970857b',
+    yoloAuctionProxyAddress: '0x4a679253410272dd5232b3ff7cf5dbb88f295319',
+
+	/*    
     fomoSettlerAddress: '0xFa7C3ab143074BcbF09db8450810d78E4B9b19a3',
     auctionProxyAddress: '0xa513E6E4b8f2a923D98304ec87F64353C4D5C853',
     nounsDescriptor: '0x53cB482c73655D2287AE3282AD1395F82e6a402F',
@@ -80,7 +115,7 @@ const config: Record<SupportedChains, Config> = {
     tokenAddress: '0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9',
     nounsDaoProxyAddress: '0x610178dA211FEF7D417bC0e6FeD39F05609AD788',
     nounsDaoExecutorAddress: '0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6',    
-    enableHistory: false,
+    */
   },
 };
 

@@ -11,6 +11,7 @@ import auction from './state/slices/auction';
 import block from './state/slices/block';
 import noun from './state/slices/noun';
 import vote from './state/slices/vote';
+import yoloNoun from './state/slices/yoloNoun';
 import settlement from './state/slices/settlement';
 import { connectRouter } from 'connected-react-router';
 import { createBrowserHistory, History } from 'history';
@@ -38,6 +39,7 @@ const createRootReducer = (history: History) =>
     noun,
     settlement,
     vote,
+    yoloNoun
   });
 
 export default function configureStore(preloadedState: any) {

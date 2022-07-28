@@ -3,8 +3,11 @@ import { useEthers } from '@usedapp/core';
 import { useAppDispatch, useAppSelector } from './hooks';
 
 import { contract as AuctionContract } from './wrappers/nounsAuction';
+import { contract as YOLOAuctionContract } from './wrappers/yoloNounsAuction';
+//import { contract as YOLOTokenContract } from './wrappers/yoloNounsToken';
 import { setAuctionEnd } from './state/slices/auction';
 import { setNextNounId } from './state/slices/noun';
+import { setLatestYOLONounId } from './state/slices/yoloNoun';
 import { setBlockAttr } from './state/slices/block';
 import { provider } from './config';
 
@@ -16,6 +19,7 @@ import '../src/css/globals.css';
 
 import NavBar from './components/NavBar';
 import Noun  from './components/Noun';
+import HistoryCollection  from './components/HistoryCollection';
 import Title from './components/Title';
 import VoteBar from './components/VoteBar';
 //import VoteProgressBar from './components/VoteProgressBar';
@@ -37,18 +41,25 @@ function App() {
   const useGreyBg = useAppSelector(state => state.noun.useGreyBg);
   const missedVotes = useAppSelector(state => state.vote.missedVotes);
 
+  const latestYOLONounId = useAppSelector(state => state.yoloNoun.latestNounId);
+
   useMemo(async ()=> { // Initalized before mount
-    const [{number: blocknumber, hash: blockhash}, auction] = await Promise.all([
+    const [{number: blocknumber, hash: blockhash}, auction, yoloAuction] = await Promise.all([
       provider.getBlock('latest'),
-      AuctionContract.auction()
+      AuctionContract.auction(),
+      YOLOAuctionContract.auction()
+      //YOLOTokenContract.totalSupply()
     ])
 
     const nextNounId = parseInt(auction?.nounId) + 1;
     const auctionEnd = auction?.endTime.toNumber();
+    const yoloTotalSupply = parseInt(yoloAuction[0].toString());
 
     dispatch(setNextNounId(nextNounId));
     dispatch(setAuctionEnd(auctionEnd));
     dispatch(setBlockAttr({blocknumber, blockhash}))
+	dispatch(setLatestYOLONounId(yoloTotalSupply - 1)); //0 indexed
+    
   }, [dispatch])
 
   useEffect(() => {
@@ -85,8 +96,10 @@ function App() {
           </Col>
         </Row>
       </Container>
-
-
+      <HistoryCollection
+        latestYOLONounId={latestYOLONounId}
+        historyCount={10}
+      />
       <Banner />
       <Documentation />
       <Footer/>

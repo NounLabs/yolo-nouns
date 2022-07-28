@@ -1,8 +1,18 @@
-import clsx from 'clsx';
 import classes from './VoteButton.module.css';
-import { VOTE_OPTIONS, setCurrentVote } from '../../state/slices/vote';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { sendVote } from '../../middleware/voteWebsocket';
+import { VOTE_OPTIONS } from '../../state/slices/vote';
+import { useAppSelector } from '../../hooks';
+
+//import { useState } from 'react';
+import { useEthers } from '@usedapp/core';
+import { connectContractToSigner } from '@usedapp/core/dist/cjs/src/hooks';
+import { Contract } from '@ethersproject/contracts'
+import { utils } from 'ethers';
+import { default as config } from '../../config';
+//import { contract as AuctionContract } from '../../wrappers/nounsAuction';
+//import { contract as MinterContract } from '../../wrappers/yoloNounsAuction';
+
+import YOLONounsAuctionHouseABI from '../../libs/abi/YOLONounsAuctionHouse.json';
+const address: string = config.yoloAuctionProxyAddress;
 
 export enum EMOJI_TYPE {
     dislike = '👎',
@@ -20,30 +30,60 @@ const voteToEmoji: Record<VOTE_OPTIONS, string> = {
 
 const VoteButton: React.FC<{voteType: VOTE_OPTIONS}> = props => {
   //const activeAuction = false; //useAppSelector(state => state.auction.activeAuction);
-  const currentVote = useAppSelector(state => state.vote.currentVote);
-  const wsConnected = useAppSelector(state => state.vote.connected);
-  const blockHash = useAppSelector(state => state.block.blockHash);
+  //const blockHash = useAppSelector(state => state.block.blockHash);
+  const blockNumber = useAppSelector(state => state.block.blockNumber);
+
   const nextNounId = useAppSelector(state => state.noun.nextNounId);
-  //const voteCounts = useAppSelector(state => state.vote.voteCounts);
-  //const votingBlockHash = useAppSelector(state => state.vote.votingBlockHash);
+  const reservePrice = utils.parseEther('0.01'); //hardcode for now, but should pull from dynamic source
 
-  //const votingActive = useAppSelector(state => state.vote.votingActive);
+  const { library } = useEthers();
+  //const dispatch = useAppDispatch();  
+  
+  //create new Contract (work-around for type issues)
+  const nounsAuctionHouseContract = new Contract(
+  	address,
+	YOLONounsAuctionHouseABI
+  );	  	
 
-  const { voteType } = props;
-  //const voteNotSelected = (currentVote !== undefined) && currentVote !== voteType;
-  const dispatch = useAppDispatch();
-  const changeVote = () => {
-    if (currentVote || !wsConnected) return;
+  /*
+  const [bidButtonContent, setBidButtonContent] = useState({
+    loading: false,
+    content: 'Place bid',
+  });
+
+  const { send: sendMintNoun, state: mintNounState } = useContractFunction(
+    nounsAuctionHouseContract,
+    'mintNoun',
+  );
+  */
+
+  const mintNounHandler = async () => {
+    if (nextNounId === null || nextNounId === undefined) {
+    	return;
+    }
     
-    dispatch(setCurrentVote(voteType));
-    dispatch(sendVote({"nounId": nextNounId, "blockhash": blockHash, "vote": voteType}));
-  }
+    if (blockNumber === undefined) {
+    	return;
+    }
+    
+    const contract = connectContractToSigner(nounsAuctionHouseContract, undefined, library);    
 
-  //disable always for demo
-  const disabled = true;//voteNotSelected || (!votingActive || activeAuction) || blockHash !== votingBlockHash
+    //const gasLimit = await contract.estimateGas.mintNoun(nextNounId, {value: reservePrice});
+    const gasLimit = 285000;
+    await contract.mintNoun(nextNounId, {value: reservePrice, gasLimit: gasLimit});
+	/*
+    sendMintNoun(nextNounId, {
+      reservePrice,
+      gasLimit: 10_000, // A 10,000 gas pad is used to avoid 'Out of gas' errors
+    });
+    */
+  };  
+
+  //disable flag // should check here for paused vs unpaused...
+  const disabled = false;//voteNotSelected || (!votingActive || activeAuction) || blockHash !== votingBlockHash
 
   return (
-      <button className={currentVote === voteType ? clsx(classes.bidBtn, classes.selected) : classes.bidBtn} onClick={changeVote}
+      <button className={classes.bidBtn} onClick={mintNounHandler}
       disabled={disabled}>
         <span className={classes.voteText}> YOLO! </span>
       </button>

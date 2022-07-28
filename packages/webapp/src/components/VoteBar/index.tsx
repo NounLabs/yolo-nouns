@@ -16,6 +16,7 @@ const VoteBar:React.FC<{}> = (props) => {
   const ethereumSocketConnected = useAppSelector(state => state.block.connected);
   const votingActive = useAppSelector(state => state.vote.votingActive);
   const blockhash = useAppSelector(state => state.block.blockHash);
+  const latestYOLONounId = useAppSelector(state => state.yoloNoun.latestNounId)!;
 
   // Approves a specific blockhash for voting after a period of time. This prevents the user from voting on a Noun by mistake as a new block is received.
   useEffect( () => {
@@ -78,7 +79,7 @@ const VoteBar:React.FC<{}> = (props) => {
 
 			    <div>
 			      <h1 className={classes.voteTitle}>
-			        YOLO Noun 101
+			        YOLO Noun {(latestYOLONounId + 1)}
 			      </h1>
 			    </div>
 

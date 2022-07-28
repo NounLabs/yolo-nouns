@@ -1,15 +1,17 @@
-import { default as globalConfig, PROVIDER_KEY } from '../config';
+import { default as globalConfig, PROVIDER_KEY, LOCAL_CHAIN_ID } from '../config';
 
 import { contract as AuctionContract } from '../wrappers/nounsAuction';
+import { contract as YOLOAuctionContract } from '../wrappers/yoloNounsAuction';
+//import { contract as YOLOTokenContract } from '../wrappers/yoloNounsToken';
 import { setAuctionEnd } from '../state/slices/auction';
 import { setEthereumConnected, setBlockAttr } from '../state/slices/block';
 import { setNextNounId } from '../state/slices/noun';
+import { setLatestYOLONounId } from '../state/slices/yoloNoun';
 import { resetVotes } from '../state/slices/vote';
 import { resetAuctionEnd } from '../state/slices/auction';
 
 import { w3cwebsocket as W3CWebSocket } from 'websocket';
 import { checkForSettlement } from './ethersProvider';
-
 
 // Define the Actions Intercepted by the Middleware
 const openEthereumSocket = (payload) => ({type: 'ethereumSocket/open', payload});
@@ -22,8 +24,9 @@ const alchemyWebsocketMiddleware = () => {
   let blockSubscription = '0x';
   let blockId = 44;
   let latestObservedBlock = 0;
-
-  const openSocket = () => new W3CWebSocket(`wss://eth-${globalConfig.chainName}.alchemyapi.io/v2/${PROVIDER_KEY}`);
+  
+  //const openSocket = () => new W3CWebSocket(`wss://eth-${globalConfig.chainName}.alchemyapi.io/v2/${PROVIDER_KEY}`);
+  const openSocket = () => (globalConfig.chainId === LOCAL_CHAIN_ID) ? new W3CWebSocket(`ws://localhost:8545`) : new W3CWebSocket(`wss://eth-${globalConfig.chainName}.alchemyapi.io/v2/${PROVIDER_KEY}`);
   const closeSocket = () => { if (socket !== null) socket.close() };
 
   // Websocket Parsing & Sending Message
@@ -83,6 +86,19 @@ const alchemyWebsocketMiddleware = () => {
 
       store.dispatch(setNextNounId(nextNounId));
       store.dispatch(setAuctionEnd(auctionEnd));
+    });
+
+    // Check the latest YOLO token status
+    YOLOAuctionContract.auction().then((yoloAuction) => {    	
+      const yoloTotalSupply = parseInt(yoloAuction[0].toString());
+      //console.log('total supply', yoloTotalSupply);
+      //console.log('reserve price', parseInt(yoloAuction[1].toString()));
+      //console.log('last block', parseInt(yoloAuction[2].toString()));
+      //console.log('paused', yoloAuction[3]);
+      
+      store.dispatch(setLatestYOLONounId(yoloTotalSupply - 1)); //0 indexed	  	
+      //store.dispatch(setNextNounId(nextNounId));
+      //store.dispatch(setAuctionEnd(auctionEnd));
     });
 
     // Update the Redux block information
