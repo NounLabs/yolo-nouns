@@ -79,7 +79,7 @@ const VoteBar:React.FC<{}> = (props) => {
 
 			    <div>
 			      <h1 className={classes.voteTitle}>
-			        YOLO Noun {(latestYOLONounId + 1)}
+			        YOLO Noun {(latestYOLONounId) ? (latestYOLONounId + 1 ) : '?'}
 			      </h1>
 			    </div>
 

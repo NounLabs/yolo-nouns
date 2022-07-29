@@ -5,7 +5,7 @@ interface YOLONoun {
 }
 
 const initialState: YOLONoun = {
-  latestNounId: null
+  latestNounId: undefined
 };
 
 export const yoloNounSlice = createSlice({

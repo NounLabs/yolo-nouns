@@ -7,6 +7,7 @@ import { Config, DAppProvider } from '@usedapp/core';
 import { Web3ReactProvider } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import account from './state/slices/account';
+import application from './state/slices/application';
 import auction from './state/slices/auction';
 import block from './state/slices/block';
 import noun from './state/slices/noun';
@@ -25,7 +26,6 @@ import voteWebsocket from './middleware/voteWebsocket';
 import ethersProviderMiddleware from './middleware/ethersProvider';
 import alchemyWebsocketMiddleware from './middleware/alchemyWebsocket';
 
-
 dotenv.config();
 
 export const history = createBrowserHistory();
@@ -34,6 +34,7 @@ const createRootReducer = (history: History) =>
   combineReducers({
     router: connectRouter(history),
     account,
+    application,
     auction,
     block,
     noun,

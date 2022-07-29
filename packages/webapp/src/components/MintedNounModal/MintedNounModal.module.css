@@ -6,7 +6,7 @@
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     width: 100%;
-    max-width: 500px;
+    max-width: 250px;
     border-radius: 15px;
 }
 
@@ -17,7 +17,7 @@
 }
 
 h3 {
-    font-size: xx-large;
+    font-size: x-large;
     font-weight: bold;
-    margin-top: 8px;
+    /*margin-top: 8px;*/
 }

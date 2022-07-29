@@ -6,7 +6,7 @@ import BlockCountdownTimer from '../BlockCountdownTimer';
 
 const Title: React.FC<{}> = props => {
   const activeAuction = false; //useAppSelector(state => state.auction.activeAuction);
-  const attemptedSettle = useAppSelector(state => state.vote.attemptedSettle);
+  //const attemptedSettle = useAppSelector(state => state.vote.attemptedSettle);
   const votingActive = useAppSelector(state => state.vote.votingActive);
   const ethereumConnected = useAppSelector(state => state.block.connected);
   const blockHash = useAppSelector(state => state.block.blockHash);
@@ -26,9 +26,11 @@ const Title: React.FC<{}> = props => {
     titleText = `Come back at Noun O'Clock in:`;
     timer = <AuctionTimer/>;
   */
+ /*
   } else if (attemptedSettle) {
     titleText = `Nouns is attempting to settle...`;
     timer = timerSpacer;
+  */
   } else if (votingActive) {
     titleText = `YOLO this Noun?`;
     //titleText = `Should we mint ${nextNounId % 10 === 0 ? 'these Nouns' : 'this Noun'}?`;

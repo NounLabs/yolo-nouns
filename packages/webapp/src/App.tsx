@@ -22,16 +22,16 @@ import Noun  from './components/Noun';
 import HistoryCollection  from './components/HistoryCollection';
 import Title from './components/Title';
 import VoteBar from './components/VoteBar';
-//import VoteProgressBar from './components/VoteProgressBar';
 import Documentation from './components/Documentation';
 import Banner from './components/Banner';
 import Footer from './components/Footer';
-//import SettledAuctionModal from './components/SettledAuctionModal';
+import AlertModal from './components/Modal';
+import MintedNounModal from './components/MintedNounModal';
+import { setAlertModal } from './state/slices/application';
 
 import { setActiveAccount } from './state/slices/account';
 import { openVoteSocket, markVoterInactive } from './middleware/voteWebsocket';
 import { openEthereumSocket } from './middleware/alchemyWebsocket';
-
 
 
 function App() {
@@ -78,28 +78,37 @@ function App() {
     }
   }, [dispatch, missedVotes]);
 
+  const alertModal = useAppSelector(state => state.application.alertModal);
 
   return (
     <div className={`${classes.App} ${useGreyBg ? classes.bgGrey : classes.bgBeige}`}>
       <NavBar />
-      
+      {alertModal.show && (
+        <AlertModal
+          title={alertModal.title}
+          content={<p>{alertModal.message}</p>}
+          onDismiss={() => dispatch(setAlertModal({ ...alertModal, show: false }))}
+        />
+      )}
+      <MintedNounModal/>
 
       <Container fluid="xl">
         <Row>
           <Col lg={{ span: 6 }} className={classes.nounContentCol}>
-		      <Noun />
+          	<Noun />
           </Col>
           <Col lg={{ span: 6 }} className={classes.auctionActivityCol}>
-				<Title/>
-		      <VoteBar />
-
+          	<Title/>
+          	<VoteBar />
           </Col>
         </Row>
       </Container>
+
       <HistoryCollection
         latestYOLONounId={latestYOLONounId}
         historyCount={10}
       />
+
       <Banner />
       <Documentation />
       <Footer/>

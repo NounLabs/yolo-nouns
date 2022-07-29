@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import Modal from '../Modal';
-import classes from './SettledAuctionModal.module.css';
+import classes from './MintedNounModal.module.css';
 import Confetti from 'react-dom-confetti';
-import axios from 'axios';
+//import axios from 'axios';
+import { provider } from '../../config';
 
 import { ImageData, getNounSeedFromBlockHash, getNounData } from '@nouns/assets';
 import { buildSVG } from '@nouns/sdk';
-import { resetPrevSettledBlockHash } from '../../state/slices/settlement';
+//import { resetPrevSettledBlockHash } from '../../state/slices/settlement';
 const { palette } = ImageData;
 
-const SettledAuctionModal: React.FC<{}> = props => {
+const MintedNounModal: React.FC<{}> = props => {
 
   const confettiConfig = {
       angle: 80,
@@ -29,18 +30,19 @@ const SettledAuctionModal: React.FC<{}> = props => {
 
   // local state variables
   const [showConnectModal, setShowConnectModal] = useState(false);
-  const [successfulSettle, setSuccessfulSettle] = useState(false);
-  const [localNounId, setLocalNounId] = useState(0);
   const [img, setImg] = useState("");
   const [showConfetti, setConfetti] = useState(false);
   const [shareCopy, setShareCopy] = useState("");
-  const [mediaURL, setMediaURL] = useState("");
-  const [showTwitter, setShowTwitter] = useState(false);
+  //const [mediaURL, setMediaURL] = useState("https://yolonouns.wtf/");
+  const mediaURL = "https://yolonouns.wtf/";
   
-  const prevSettledBlockHash = useAppSelector(state => state.settlement.prevSettledBlockHash);
-  const attemptedSettleBlockHash = useAppSelector(state => state.settlement.attemptedSettleBlockHash);
-  const nextNounId = useAppSelector(state => state.noun.nextNounId);
+  //const prevSettledBlockHash = useAppSelector(state => state.settlement.prevSettledBlockHash);
+  //const attemptedSettleBlockHash = useAppSelector(state => state.settlement.attemptedSettleBlockHash);
+  //const nextNounId = useAppSelector(state => state.noun.nextNounId);
 
+  const lastAttemptedNextNounId = useAppSelector(state => state.application.lastAttemptedNextNounId);
+  const lastMintedBlockNumber = useAppSelector(state => state.application.lastMintedBlockNumber);
+  
   const showModalHandler = () => {
     setShowConnectModal(true);
   };
@@ -51,9 +53,13 @@ const SettledAuctionModal: React.FC<{}> = props => {
 
   // get the image of the most recently minted Noun from Twitter
   useEffect(() => {
-    if (showConnectModal && successfulSettle && localNounId > 0) {
-      setShareCopy(encodeURI("gm, I just minted this Noun for @nounsdao by playing FOMO Nouns! "));
+  	if (lastAttemptedNextNounId === undefined || lastAttemptedNextNounId === null) return;  	
+  	
+    if (showConnectModal && /*successfulSettle &&*/ lastAttemptedNextNounId > 0) {
+      setShareCopy(encodeURI("YOLO! I just minted a Noun with @YOLONouns! "));
+      
       // wait for 750ms, then fetch image from twitter
+      /*
       setTimeout(() => {
         axios.get('/.netlify/functions/twitter', {params: {id: localNounId}})
         .then( res => {
@@ -66,46 +72,52 @@ const SettledAuctionModal: React.FC<{}> = props => {
           }
         });
       }, 15000);
-      
+      */
       setConfetti(true);
     }
-  }, [showConnectModal, successfulSettle, showConfetti, localNounId, mediaURL]);
+  }, [showConnectModal, /*successfulSettle,*/ showConfetti, lastAttemptedNextNounId, mediaURL]);
 
   useEffect(() => {
-    const getNounImg = () => {
-      if (nextNounId === undefined || nextNounId === null) return;
-      if (!prevSettledBlockHash) return;
-      const adjNounId = nextNounId - 1;
-      setLocalNounId(adjNounId);
-      const seed = getNounSeedFromBlockHash(adjNounId, prevSettledBlockHash);
+	const getNounImg = async () => {
+      if (lastAttemptedNextNounId === undefined || lastAttemptedNextNounId === null) return;
+      if (!lastMintedBlockNumber) return;
+      
+      //get the proper hash 
+      const lastBlock = await provider.getBlock(lastMintedBlockNumber - 1);
+      const lastMintedBlockHash = lastBlock.hash;
+
+      const seed = getNounSeedFromBlockHash(lastAttemptedNextNounId, lastMintedBlockHash);
       const { parts, background } = getNounData(seed);
   
       const svgBinary = buildSVG(parts, palette, background);
       setImg(btoa(svgBinary));
     }
 
-    if (prevSettledBlockHash) {
+    if (lastMintedBlockNumber) {
+      setImg("");
       getNounImg();
-      attemptedSettleBlockHash === prevSettledBlockHash ? setSuccessfulSettle(true) : setSuccessfulSettle(false);
+      //setSuccessfulSettle(true);
       showModalHandler();
-      dispatch(resetPrevSettledBlockHash());
+      //dispatch(resetPrevSettledBlockHash());
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [attemptedSettleBlockHash, prevSettledBlockHash, nextNounId, dispatch]);
+  }, [lastMintedBlockNumber, lastAttemptedNextNounId, dispatch]);
 
-  const isTenthNoun = localNounId % 10 === 0;
-  const copy = successfulSettle ? `Hello, Noun ${isTenthNoun ? `${localNounId} & ${localNounId+1}`: localNounId} 👋` : `Someone else minted Noun ${isTenthNoun ? `${localNounId} & ${localNounId+1}`: localNounId}`;
-  const title = successfulSettle ? `We minted ${isTenthNoun ? 'some Nouns': 'a Noun'}!` : `We missed ${isTenthNoun ? 'them' : 'it'}!`;
+
+
+  const title = 'YOLO! You minted a Noun!';
   const settledAuctionContent = (
     <>
     <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
     <Confetti active={showConfetti} config={confettiConfig}/>
     <h3>{title}</h3>
     <img src={`data:image/svg+xml;base64,${img}`} className={classes.NounImg} alt={`Minted Noun`}/>
-    <h3>{copy}</h3>
-    <p className={classes.Footer}>Come back and play again tomorrow!</p>
-    {showTwitter && 
-    <a className='twitter-share-button' href={`https://twitter.com/intent/tweet/?text=${shareCopy + mediaURL}`}>Tweet </a>}
+    <p className={classes.Footer}>
+    	See another one you like? Keep YOLOing!
+    	<br />
+    	<a className='twitter-share-button' href={`https://twitter.com/intent/tweet/?text=${shareCopy + mediaURL}`}>Tweet Me!</a>
+    </p>
+    
     </>
     );
 
@@ -115,4 +127,4 @@ const SettledAuctionModal: React.FC<{}> = props => {
     </div>
   )
 };
-export default SettledAuctionModal;
+export default MintedNounModal;
