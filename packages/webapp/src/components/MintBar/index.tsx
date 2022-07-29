@@ -109,14 +109,15 @@ const MintBar:React.FC<{}> = (props) => {
         </Row>
       
       <Row>
-        <Col lg={12}>
+        <Col lg={12} className={classes.explainerText}>
 
 			<strong>HOW TO YOLO:</strong>
 			<ul>
-				<li> <strong>CLICK</strong> - Click the YOLO button above</li>
-				<li> <strong>CONFIRM</strong> - Confirm transaction in your wallet</li>
-				<li> <strong>ACT FAST</strong> - Blocks move <i>really</i> fast (~13 seconds)</li>
-				<li> <strong>FCFS</strong> - First come, first serve, only 1 Noun per block</li>
+				<li> <strong>CLICK</strong>: Click the YOLO! button above</li>
+				<li> <strong>CONFIRM</strong>: Confirm the transaction in your wallet</li>
+				<li> <strong>ACT FAST</strong>: Blocks move <i>really</i> fast (~13 seconds)</li>
+				<li> <strong>FCFS</strong>: First come, first serve, only 1 Noun per block</li>
+				<li> <strong>WARNING</strong>: If not fast enough, you may mint the next Noun instead</li>
 			</ul>
 
         </Col>

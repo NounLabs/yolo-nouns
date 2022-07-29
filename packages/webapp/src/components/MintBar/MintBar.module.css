@@ -96,7 +96,13 @@
 
 	.votePriceText {
 	  text-align: right;
-	 }	
+	 }
+	 
+	 .explainerText {
+	 }
+
+	 ol, ul {
+	 }
 }
 
 @media (max-width: 568px) {
@@ -107,5 +113,13 @@
 
 	.votePriceText {
 	  text-align: right;
-	 }		
+	 }
+	 
+	 .explainerText {
+	  	font-size: 0.9rem;	 	
+	 }
+
+	 ol, ul {
+		padding-left: 1rem;	 	
+	 }	 
 }

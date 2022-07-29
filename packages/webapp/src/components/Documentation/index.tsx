@@ -33,6 +33,10 @@ const Documentation = () => {
     <Link text="Nouns" url="https://nouns.wtf" leavesPage={true} />
   );
 
+  const fomoNounsLink = (
+    <Link text="FOMO Nouns" url="https://fomonouns.wtf" leavesPage={true} />
+  );
+
 
   return (
     <div className={classes.Documentation}>
@@ -45,6 +49,15 @@ const Documentation = () => {
             With YOLO Nouns you can capture each Noun and each moment on-chain, block by block.            
             This happens <i>really</i> fast, so if you see a Noun you like, be sure to YOLO quickly!
 
+			<br /><br />
+			YOLO Nouns are not Playground Nouns – they follow the same on-chain sequence and provenance as the {nounsDaoLink} DAO, 
+			leveraging the same Seeder contract that is used to determine Noun traits during the minting process.
+			In fact, you can compare them to what you see on {fomoNounsLink}. So when you mint a YOLO Noun you are minting a Noun that could have actually been minted on-chain.
+			<br /><br />
+			<strong>WARNING</strong>: To YOLO means to live in the moment and to take risks -  
+			due to the speed of blocks, when you YOLO on-chain you run the risk that you may not be fast enough to catch your target, 
+			and you may end up minting the Noun on the next block instead - 
+			but that doesn't bother you, as they say, YOU ONLY LIVE ONCE!
           </p>
           
         </div>
@@ -56,10 +69,11 @@ const Documentation = () => {
                 <li>YOLO Nouns lets you watch, block by block, the next possible Noun</li>
                 <li>A new unique Noun is available on every block</li>
                 <li>There's no guarantee that you'll get the Noun due to the speed of blocks</li>
-                <li>Only one YOLO Noun can be minted per block</li>
-                <li>If someone YOLOs into the Noun before you YOLO, your request will be rejected</li>
+                <li>Only one Noun can be minted per block</li>
+                <li>If someone mints the same Noun before you do, your request will be rejected</li>
                 <li>We are not kidding -- these Nouns change REALLY fast, so YOLO quickly!</li>
                 <li>A Noun can't always be minted if the chain moves too fast. Keep trying!</li>
+                <li><strong>WARNING</strong> - If you're not fast enough, you may mint the Noun on the next block instead</li>
               </ul>
 	              
             </Accordion.Body>
