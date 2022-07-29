@@ -1,4 +1,4 @@
-import classes from './VoteButton.module.css';
+import classes from './MintButton.module.css';
 import { VOTE_OPTIONS } from '../../state/slices/vote';
 import { useAppSelector } from '../../hooks';
 
@@ -23,7 +23,7 @@ const yoloAuctionHouseABI = new utils.Interface(YOLONounsAuctionHouseABI);
 const reservePrice = utils.parseEther('0.01');
 const gasLimit = 285000;
 
-const VoteButton: React.FC<{voteType: VOTE_OPTIONS}> = props => {
+const MintButton: React.FC<{voteType: VOTE_OPTIONS}> = props => {
   //const activeAuction = false; //useAppSelector(state => state.auction.activeAuction);
   //const blockHash = useAppSelector(state => state.block.blockHash);
   const blockNumber = useAppSelector(state => state.block.blockNumber);
@@ -128,4 +128,4 @@ const VoteButton: React.FC<{voteType: VOTE_OPTIONS}> = props => {
       </button>
   );
 };
-  export default VoteButton;
+  export default MintButton;

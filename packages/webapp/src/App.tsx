@@ -21,7 +21,7 @@ import NavBar from './components/NavBar';
 import Noun  from './components/Noun';
 import HistoryCollection  from './components/HistoryCollection';
 import Title from './components/Title';
-import VoteBar from './components/VoteBar';
+import MintBar from './components/MintBar';
 import Documentation from './components/Documentation';
 import Banner from './components/Banner';
 import Footer from './components/Footer';
@@ -99,7 +99,7 @@ function App() {
           </Col>
           <Col lg={{ span: 6 }} className={classes.auctionActivityCol}>
           	<Title/>
-          	<VoteBar />
+          	<MintBar />
           </Col>
         </Row>
       </Container>

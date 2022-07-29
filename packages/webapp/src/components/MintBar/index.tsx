@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import VoteButton from '../VoteButton';
+import MintButton from '../MintButton';
 import { VOTE_OPTIONS, setVotingBlockHash } from '../../state/slices/vote';
-import classes from './VoteBar.module.css';
+import classes from './MintBar.module.css';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { openVoteSocket } from '../../middleware/voteWebsocket';
 import { openEthereumSocket } from '../../middleware/alchemyWebsocket';
@@ -9,7 +9,7 @@ import { openEthereumSocket } from '../../middleware/alchemyWebsocket';
 import { Col, Row } from 'react-bootstrap';
 
 
-const VoteBar:React.FC<{}> = (props) => {
+const MintBar:React.FC<{}> = (props) => {
   const dispatch = useAppDispatch();
   const activeAuction = useAppSelector(state => state.auction.activeAuction);
   const voteSocketConnected = useAppSelector(state => state.vote.connected);
@@ -35,7 +35,7 @@ const VoteBar:React.FC<{}> = (props) => {
 
   const voteOpts = (neutralOption: boolean) => (
     <>
-      <VoteButton voteType={VOTE_OPTIONS.voteLike} />
+      <MintButton voteType={VOTE_OPTIONS.voteLike} />
     </>
   );
 
@@ -125,4 +125,4 @@ const VoteBar:React.FC<{}> = (props) => {
   );
 }
 
-export default VoteBar;
+export default MintBar;
