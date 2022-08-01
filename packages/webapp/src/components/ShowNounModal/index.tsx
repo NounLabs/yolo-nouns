@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import Modal from '../Modal';
-import classes from './MintedNounModal.module.css';
+import classes from './ShowNounModal.module.css';
 import Confetti from 'react-dom-confetti';
 import loadingNoun from '../../assets/loading-skull-noun.gif';
-import { provider } from '../../config';
+//import { provider } from '../../config';
 
-import { ImageData, getNounSeedFromBlockHash, getNounData } from '@nouns/assets';
+import { ImageData, getNounData } from '@nouns/assets';
 import { buildSVG } from '@nouns/sdk';
-//import { resetPrevSettledBlockHash } from '../../state/slices/settlement';
+import { contract as YOLOTokenContract } from '../../wrappers/yoloNounsToken';
 const { palette } = ImageData;
 
-const MintedNounModal: React.FC<{}> = props => {
+const ShowNounModal: React.FC<{}> = props => {
 
   const confettiConfig = {
       angle: 80,
@@ -39,9 +39,8 @@ const MintedNounModal: React.FC<{}> = props => {
   //const attemptedSettleBlockHash = useAppSelector(state => state.settlement.attemptedSettleBlockHash);
   //const nextNounId = useAppSelector(state => state.noun.nextNounId);
 
-  const lastAttemptedNextNounId = useAppSelector(state => state.application.lastAttemptedNextNounId);
-  const lastMintedBlockNumber = useAppSelector(state => state.application.lastMintedBlockNumber);
-  
+  const showYOLONounId = useAppSelector(state => state.application.showYOLONounId);
+    
   const showModalHandler = () => {
     setShowConnectModal(true);
   };
@@ -52,35 +51,31 @@ const MintedNounModal: React.FC<{}> = props => {
 
   // get the image of the most recently minted Noun from Twitter
   useEffect(() => {
-  	if (lastAttemptedNextNounId === undefined || lastAttemptedNextNounId === null) return;  	
+  	if (showYOLONounId === undefined || showYOLONounId === null) return;  	
   	
-    if (showConnectModal && /*successfulSettle &&*/ lastAttemptedNextNounId > 0) {
-      setShareCopy(encodeURI("YOLO! I just minted this Noun at @YOLONouns! "));
+    if (showConnectModal && /*successfulSettle &&*/ showYOLONounId > 0) {
+      setShareCopy(encodeURI("YOLO! Check out this Noun at @YOLONouns! "));
            
-      setConfetti(true);
+      setConfetti(false);
     }
-  }, [showConnectModal, /*successfulSettle,*/ showConfetti, lastAttemptedNextNounId, mediaURL]);
+  }, [showConnectModal, /*successfulSettle,*/ showConfetti, showYOLONounId, mediaURL]);
 
   useEffect(() => {
 	const getNounImg = async () => {
-      if (lastAttemptedNextNounId === undefined || lastAttemptedNextNounId === null) return;
-      if (!lastMintedBlockNumber) return;
+      if (showYOLONounId === undefined || showYOLONounId === null) return;
+
       
-      //get the proper hash 
-      const lastBlock = await provider.getBlock(lastMintedBlockNumber - 1);
-      const lastMintedBlockHash = lastBlock.hash;
-
-      const seed = getNounSeedFromBlockHash(lastAttemptedNextNounId, lastMintedBlockHash);
-
+      const seed = await YOLOTokenContract.seeds(showYOLONounId);
+      
       setMediaURL(encodeURIComponent("https://yolonouns.wtf/share/share-noun?bg=" + seed.background + "&b=" + seed.body + "&a=" + seed.accessory + "&h=" + seed.head + "&g=" + seed.glasses));
-
+      
       const { parts, background } = getNounData(seed);
-  
+      
       const svgBinary = buildSVG(parts, palette, background);
       setImgSrc(`data:image/svg+xml;base64,${btoa(svgBinary)}`);
     }
 
-    if (lastMintedBlockNumber) {
+    if (showYOLONounId) {
       setImgSrc(loadingNoun);
       getNounImg();
       //setSuccessfulSettle(true);
@@ -88,18 +83,19 @@ const MintedNounModal: React.FC<{}> = props => {
       //dispatch(resetPrevSettledBlockHash());
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lastMintedBlockNumber, lastAttemptedNextNounId, dispatch]);
+  }, [showYOLONounId, dispatch]);
 
 
 
-  const title = 'YOLO! You minted a Noun!';
+  const title = 'YOLO!';
   const yoloNounContent = (
     <>
     <Confetti active={showConfetti} config={confettiConfig}/>
     <h3>{title}</h3>
-    <img src={imgSrc} className={classes.NounImg} alt={`Minted Noun`}/>
+    <img src={imgSrc} className={classes.NounImg} alt={`YOLO Noun`}/>
+    
     <p className={classes.Footer}>
-    	See another one you like? Keep YOLOing!
+    	If you were YOLOing this Noun could've been yours!
     </p>
     <p>
     	<a className={classes.twitterBtn} href={`https://twitter.com/intent/tweet/?text=${shareCopy + mediaURL}`}>Tweet This!</a>    
@@ -114,4 +110,4 @@ const MintedNounModal: React.FC<{}> = props => {
     </div>
   )
 };
-export default MintedNounModal;
+export default ShowNounModal;

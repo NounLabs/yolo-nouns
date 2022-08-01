@@ -5,10 +5,20 @@ const sharp = require('sharp');
 
 exports.handler = async(event, context) => {
     const queryParams = event.queryStringParameters;
-
-	const nextNounId = queryParams['n'];
-	const blockhash = queryParams['h'];
-	const seed = getNounSeedFromBlockHash(nextNounId, blockhash);
+	
+    const bg = queryParams['bg']; //bg
+	const b = queryParams['b']; //body
+	const a = queryParams['a']; //accessory
+	const h = queryParams['h']; //head
+	const g = queryParams['g']; //glasses
+	
+	const seed = {
+		background: bg,
+	    body: b,
+	    accessory: a,
+	    head: h,
+	    glasses: g,
+	};	
 	
 	const { parts, background } = getNounData(seed);
 	const svgBinary = buildSVG(parts, palette, background);

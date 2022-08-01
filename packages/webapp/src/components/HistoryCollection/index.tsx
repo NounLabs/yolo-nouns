@@ -31,7 +31,7 @@ const HistoryCollection: React.FC<HistoryCollectionProps> = (props: HistoryColle
   nounIds.reverse();
   
   const nounsContent = nounIds.map((nounId, i) => {
-    return !nounId ? '' : <YOLONoun key={i} latestYOLONounId={parseInt(nounId?.toString())} />;
+    return !nounId ? '' : <YOLONoun key={i} yoloNounId={parseInt(nounId?.toString())} />;
   });
 
   return (

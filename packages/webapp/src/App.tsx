@@ -27,6 +27,7 @@ import Banner from './components/Banner';
 import Footer from './components/Footer';
 import AlertModal from './components/Modal';
 import MintedNounModal from './components/MintedNounModal';
+import ShowNounModal from './components/ShowNounModal';
 import { setAlertModal } from './state/slices/application';
 
 import { setActiveAccount } from './state/slices/account';
@@ -90,6 +91,7 @@ function App() {
           onDismiss={() => dispatch(setAlertModal({ ...alertModal, show: false }))}
         />
       )}
+      <ShowNounModal/>
       <MintedNounModal/>
 
       <Container fluid="xl">

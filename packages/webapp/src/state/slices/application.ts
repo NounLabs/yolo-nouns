@@ -10,14 +10,16 @@ interface ApplicationState {
   alertModal: AlertModal;
   lastAttemptedNextNounId?: number | null;
   lastMintedBlockNumber?: number | null;
+  showYOLONounId?: number | null;
 }
 
 const initialState: ApplicationState = {
   alertModal: {
     show: false
-  },
+  },  
   lastAttemptedNextNounId: undefined,
-  lastMintedBlockNumber: undefined
+  lastMintedBlockNumber: undefined,
+  showYOLONounId: undefined
 };
 
 export const applicationSlice = createSlice({
@@ -33,9 +35,12 @@ export const applicationSlice = createSlice({
     setLastMintedBlockNumber: (state, action: PayloadAction<number | undefined>) => {
       state.lastMintedBlockNumber = action.payload;
     },    
+    setShowYOLONounId: (state, action: PayloadAction<number>) => {
+      state.showYOLONounId = action.payload;
+    },    
   },
 });
 
-export const { setAlertModal, setLastAttemptedNextNounId, setLastMintedBlockNumber } = applicationSlice.actions;
+export const { setAlertModal, setLastAttemptedNextNounId, setLastMintedBlockNumber, setShowYOLONounId } = applicationSlice.actions;
 
 export default applicationSlice.reducer;
