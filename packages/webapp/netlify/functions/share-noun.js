@@ -17,7 +17,7 @@ exports.handler = async(event, context) => {
 	    body: `
 		    <html>
 			    <head>
-					<meta name="twitter:card" content="summary_large_image" />
+					<meta name="twitter:card" content="summary" />
 					<meta name="twitter:site" content="@yolonouns" />
 					<meta name="twitter:title" content="YOLO Nouns">
 					<meta name="twitter:description" content="YOLO into Nouns!">
