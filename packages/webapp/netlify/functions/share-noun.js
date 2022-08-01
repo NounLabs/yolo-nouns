@@ -45,8 +45,9 @@ exports.handler = async(event, context) => {
 			    </head>
 			    <body>
     				<noscript>You need to enable JavaScript to run this app.</noscript>
-			    
-			    	<img src="https://yolonouns.wtf/share/noun-png?n=${nounId}&h=${hash}" />
+			    	<center>
+				    	<img src="https://yolonouns.wtf/share/noun-png?n=${nounId}&h=${hash}" />
+			    	</center>
 			    </body>
 		    </html>
 	    `,        

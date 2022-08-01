@@ -33,8 +33,7 @@ const MintedNounModal: React.FC<{}> = props => {
   const [img, setImg] = useState("");
   const [showConfetti, setConfetti] = useState(false);
   const [shareCopy, setShareCopy] = useState("");
-  //const [mediaURL, setMediaURL] = useState("https://yolonouns.wtf/");
-  const mediaURL = "https://yolonouns.wtf/";
+  const [mediaURL, setMediaURL] = useState("https://yolonouns.wtf/");
   
   //const prevSettledBlockHash = useAppSelector(state => state.settlement.prevSettledBlockHash);
   //const attemptedSettleBlockHash = useAppSelector(state => state.settlement.attemptedSettleBlockHash);
@@ -56,7 +55,7 @@ const MintedNounModal: React.FC<{}> = props => {
   	if (lastAttemptedNextNounId === undefined || lastAttemptedNextNounId === null) return;  	
   	
     if (showConnectModal && /*successfulSettle &&*/ lastAttemptedNextNounId > 0) {
-      setShareCopy(encodeURI("YOLO! I just minted a Noun with @YOLONouns! "));
+      setShareCopy(encodeURI("YOLO! I just minted this Noun at @YOLONouns! "));
       
       // wait for 750ms, then fetch image from twitter
       /*
@@ -73,6 +72,7 @@ const MintedNounModal: React.FC<{}> = props => {
         });
       }, 15000);
       */
+     
       setConfetti(true);
     }
   }, [showConnectModal, /*successfulSettle,*/ showConfetti, lastAttemptedNextNounId, mediaURL]);
@@ -86,11 +86,13 @@ const MintedNounModal: React.FC<{}> = props => {
       const lastBlock = await provider.getBlock(lastMintedBlockNumber - 1);
       const lastMintedBlockHash = lastBlock.hash;
 
+      setMediaURL(encodeURIComponent("https://yolonouns.wtf/share/share-noun?n=" + lastAttemptedNextNounId + "&h=" + lastMintedBlockHash));
+
       const seed = getNounSeedFromBlockHash(lastAttemptedNextNounId, lastMintedBlockHash);
       const { parts, background } = getNounData(seed);
   
       const svgBinary = buildSVG(parts, palette, background);
-      setImg(btoa(svgBinary));
+      setImg(btoa(svgBinary));      
     }
 
     if (lastMintedBlockNumber) {
