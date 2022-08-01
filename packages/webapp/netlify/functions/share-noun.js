@@ -27,10 +27,10 @@ exports.handler = async(event, context) => {
 	    			<title>YOLO Nouns</title>
 	    			<link rel="shortcut icon" type="image/jpg" href="/static/favicon.ico"/>
 
-					<meta name="twitter:card" content="summary" />
+					<meta name="twitter:card" content="summary_large_image" />
 					<meta name="twitter:site" content="@yolonouns" />
 					<meta name="twitter:title" content="YOLO Nouns">
-					<meta name="twitter:description" content="YOLO into Nouns!">
+					<meta name="twitter:description" content="EVERY.BLOCK.FOREVER. YOLO Nouns is an experimental social project for the Nouns community.">
 					<meta name="twitter:image" content="https://yolonouns.wtf/share/noun-png?n=${nounId}&h=${hash}">
 
 					<meta property="og:title" content="YOLO Nouns" />

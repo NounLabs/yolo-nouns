@@ -12,12 +12,19 @@ exports.handler = async(event, context) => {
 	
 	const { parts, background } = getNounData(seed);
 	const svgBinary = buildSVG(parts, palette, background);
-	
+		
 	let base64Data = '';
 	
 	try{ 
 		const svgNoun = Buffer.from(svgBinary);
-	  	const pngNoun = await sharp(svgNoun).png().toBuffer();
+	  	const pngNoun = await sharp(svgNoun)
+	  					.png()
+	  					.extend({
+	  						left: 160,
+	  						right: 160,
+						    background: '#' + background
+						})
+	  					.toBuffer();
 	  		  	
 	  	base64Data = pngNoun.toString('base64');
 
