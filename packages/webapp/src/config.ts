@@ -62,9 +62,9 @@ const config: Record<SupportedChains, Config> = {
     enableHistory: process.env.REACT_APP_ENABLE_HISTORY === 'true' || false,
     
 
-    yoloTokenAddress: '0x6B582455b4C5322F44216121372D1b9418d0335a',
-    yoloNounsDescriptor: '0xf142d23eb180449676758549aa085c9DbfaB3c4E',
-    yoloAuctionProxyAddress: '0x8242241A0f2911De52Cee2C9321A291Aa7255854',
+    yoloTokenAddress: '0x31f5f6400e753Cfc071B18BAFdBE3Cb9aE22878f',
+    yoloNounsDescriptor: '0x86ACfD89cb0564B5597576b6B2b71554d1920E78',
+    yoloAuctionProxyAddress: '0x27ff1c1f9768f6fd61931ad5C62D0f9B0f6DfaEa',
     
   },
   [ChainId.Mainnet]: {

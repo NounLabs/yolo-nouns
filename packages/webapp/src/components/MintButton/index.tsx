@@ -61,11 +61,11 @@ const MintButton: React.FC<{voteType: VOTE_OPTIONS}> = props => {
     }
     
     //const contract = connectContractToSigner(nounsAuctionHouseContract, undefined, library);    
-    //const gasLimit = await contract.estimateGas.mintNoun(nextNounId, {value: reservePrice});
-    //await contract.mintNoun(nextNounId, {value: reservePrice, gasLimit: gasLimit});
+    //const gasLimit = await contract.estimateGas.mintNoun({value: reservePrice});
+    //await contract.mintNoun({value: reservePrice, gasLimit: gasLimit});
 
 	dispatch(setLastAttemptedNextNounId(nextNounId));
-    sendMintNoun(nextNounId, {
+    sendMintNoun({
       value: reservePrice,
       gasLimit: gasLimit
     });
