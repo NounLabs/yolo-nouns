@@ -81,9 +81,9 @@ const config: Record<SupportedChains, Config> = {
     nounsDaoExecutorAddress: '0x0BC3807Ec262cB779b38D65b38158acC3bfedE10',
     enableHistory: process.env.REACT_APP_ENABLE_HISTORY === 'true' || false,
     
-    yoloTokenAddress: '0xc92D563Afac62855cc42E70D6CF52976a99a14b1',
-    yoloNounsDescriptor: '0x707C6707ecb006b1c42296856B16eF8F472B130E',
-    yoloAuctionProxyAddress: '0xB74A82e05b18bbBc682282e3a4Faa4a5F50Ad88B',
+    yoloTokenAddress: '0xB9e9053aB6dDd4f3FF717c1a22192D3517963A80',
+    yoloNounsDescriptor: '0x5C12625d870ac2A93F4e08318BA4bF0c5C0C4270',
+    yoloAuctionProxyAddress: '0xac3D44155D74D2D66117039fF4bC166DE2151Ab6',
     
   },
   [LOCAL_CHAIN_ID]: {
