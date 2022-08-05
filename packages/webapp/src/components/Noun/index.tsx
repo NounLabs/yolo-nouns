@@ -3,10 +3,13 @@ import loadingNoun from '../../assets/loading-skull-noun.gif';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setActiveBackground } from '../../state/slices/noun';
 import classes from '../Noun/Noun.module.css';
+import { default as config } from '../../config';
 
 import { ImageData, getNounSeedFromBlockHash, getNounData } from '@nouns/assets';
 import { buildSVG } from '@nouns/sdk';
 const { palette } = ImageData;
+
+const hardPause = config.hardPause;
 
 function getNounImage(nounId: number, blockhash: string){
   const seed = getNounSeedFromBlockHash(nounId, blockhash);
@@ -28,9 +31,9 @@ const Noun: React.FC = props => {
     const data = []
 
     // Return the Loading Noun
-    if (!blockhash || !nextNounId || !ethereumConnected){
+    if (hardPause || !blockhash || !nextNounId || !ethereumConnected){
       data.push({seed: {background: 0}, src: loadingNoun, alt: 'Loading Noun', nounId:''});
-      return data
+      return data;
     }
 
     // Push the first Noun

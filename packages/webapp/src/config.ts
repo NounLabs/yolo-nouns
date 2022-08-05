@@ -40,6 +40,8 @@ interface Config {
   yoloTokenAddress: string;
   yoloNounsDescriptor: string;
   yoloAuctionProxyAddress: string;
+  
+  hardPause: boolean;
 }
 
 const config: Record<SupportedChains, Config> = {
@@ -61,11 +63,11 @@ const config: Record<SupportedChains, Config> = {
 
     enableHistory: process.env.REACT_APP_ENABLE_HISTORY === 'true' || false,
     
-
     yoloTokenAddress: '0x31f5f6400e753Cfc071B18BAFdBE3Cb9aE22878f',
     yoloNounsDescriptor: '0x86ACfD89cb0564B5597576b6B2b71554d1920E78',
     yoloAuctionProxyAddress: '0x27ff1c1f9768f6fd61931ad5C62D0f9B0f6DfaEa',
-    
+
+    hardPause: process.env.REACT_APP_HARD_PAUSE === 'true' || false,
   },
   [ChainId.Mainnet]: {
     chainName: 'mainnet',
@@ -84,7 +86,8 @@ const config: Record<SupportedChains, Config> = {
     yoloTokenAddress: '0xB9e9053aB6dDd4f3FF717c1a22192D3517963A80',
     yoloNounsDescriptor: '0x5C12625d870ac2A93F4e08318BA4bF0c5C0C4270',
     yoloAuctionProxyAddress: '0xac3D44155D74D2D66117039fF4bC166DE2151Ab6',
-    
+
+    hardPause: process.env.REACT_APP_HARD_PAUSE === 'true' || false,
   },
   [LOCAL_CHAIN_ID]: {
     chainName: 'local',
@@ -116,6 +119,8 @@ const config: Record<SupportedChains, Config> = {
     nounsDaoProxyAddress: '0x610178dA211FEF7D417bC0e6FeD39F05609AD788',
     nounsDaoExecutorAddress: '0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6',    
     */
+
+    hardPause: process.env.REACT_APP_HARD_PAUSE === 'true' || false,
   },
 };
 

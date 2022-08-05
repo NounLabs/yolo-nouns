@@ -20,6 +20,8 @@ import YOLONounsAuctionHouseABI from '../../libs/abi/YOLONounsAuctionHouse.json'
 const address: string = config.yoloAuctionProxyAddress;
 const yoloAuctionHouseABI = new utils.Interface(YOLONounsAuctionHouseABI);
 
+const hardPause = config.hardPause;
+
 const reservePrice = utils.parseEther('0.01');
 const gasLimit = 285000;
 
@@ -117,7 +119,7 @@ const MintButton: React.FC<{voteType: VOTE_OPTIONS}> = props => {
   //disable flag // should check here for paused vs unpaused...
   //const disabled = false;//voteNotSelected || (!votingActive || activeAuction) || blockHash !== votingBlockHash
   //should also check for connected here....
-  const disabled = mintNounState.status === 'PendingSignature' || mintNounState.status === 'Mining';
+  const disabled = hardPause || (mintNounState.status === 'PendingSignature') || (mintNounState.status === 'Mining');
 
   return (
       <button className={classes.bidBtn} onClick={mintNounHandler}

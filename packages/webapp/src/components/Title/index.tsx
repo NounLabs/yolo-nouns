@@ -3,6 +3,9 @@ import { useAppSelector } from "../../hooks";
 import classes from "./Title.module.css";
 //import AuctionTimer from '../AuctionTimer';
 import BlockCountdownTimer from '../BlockCountdownTimer';
+import { default as config } from '../../config';
+
+const hardPause = config.hardPause;
 
 const Title: React.FC<{}> = props => {
   const activeAuction = false; //useAppSelector(state => state.auction.activeAuction);
@@ -15,7 +18,11 @@ const Title: React.FC<{}> = props => {
   let timerSpacer = (<div className={classes.timerSpacer}>&nbsp;</div>);
 
   let titleText = '', timer = <></>;
-  if (!ethereumConnected) {
+  
+  if (hardPause) {
+    titleText = `YOLO is paused for updates...`;
+    timer = timerSpacer;  	
+  } else if (!ethereumConnected) {
     titleText = `Awaiting connection...`;
     timer = timerSpacer;
   } else if (!blockHash || activeAuction === undefined) {
