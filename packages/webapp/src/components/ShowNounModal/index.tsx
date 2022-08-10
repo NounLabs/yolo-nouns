@@ -93,16 +93,16 @@ const ShowNounModal: React.FC<{}> = props => {
 
 
 
-  const title = 'YOLO!';
+  const title = 'YOLO Noun ';
   const yoloNounContent = (
     <>
     <Confetti active={showConfetti} config={confettiConfig}/>
-    <h3>{title}</h3>
+    <h3>{title + showYOLONounId}</h3>
 	<img src={imgSrc} className={classes.NounImg} alt={`YOLO Noun`} data-tip data-for="noun-traits-show-modal"/>
     <p className={classes.Footer}>
     	If you were YOLOing this Noun could've been yours!
     </p>
-    <p>
+    <p className={classes.Footer}>
     	<a className={classes.twitterBtn} href={`https://twitter.com/intent/tweet/?text=${shareCopy + mediaURL}`}>Tweet This!</a>    
     </p>
     
