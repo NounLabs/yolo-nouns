@@ -9,6 +9,8 @@ import loadingNoun from '../../assets/loading-skull-noun.gif';
 import { ImageData, getNounData } from '@nouns/assets';
 import { buildSVG } from '@nouns/sdk';
 import { contract as YOLOTokenContract } from '../../wrappers/yoloNounsToken';
+import NounTraitsOverlay from '../NounTraitsOverlay';
+
 const { palette } = ImageData;
 
 const ShowNounModal: React.FC<{}> = props => {
@@ -27,10 +29,12 @@ const ShowNounModal: React.FC<{}> = props => {
   };
 
   const dispatch = useAppDispatch();
+  const emptyParts: any = null;
 
   // local state variables
   const [showConnectModal, setShowConnectModal] = useState(false);
   const [imgSrc, setImgSrc] = useState(loadingNoun);
+  const [imgParts, setImgParts] = useState(emptyParts);
   const [showConfetti, setConfetti] = useState(false);
   const [shareCopy, setShareCopy] = useState("");
   const [mediaURL, setMediaURL] = useState("https://yolonouns.wtf/");
@@ -73,10 +77,12 @@ const ShowNounModal: React.FC<{}> = props => {
       
       const svgBinary = buildSVG(parts, palette, background);
       setImgSrc(`data:image/svg+xml;base64,${btoa(svgBinary)}`);
+      setImgParts(parts);
     }
 
     if (showYOLONounId) {
       setImgSrc(loadingNoun);
+      setImgParts(emptyParts);
       getNounImg();
       //setSuccessfulSettle(true);
       showModalHandler();
@@ -92,8 +98,7 @@ const ShowNounModal: React.FC<{}> = props => {
     <>
     <Confetti active={showConfetti} config={confettiConfig}/>
     <h3>{title}</h3>
-    <img src={imgSrc} className={classes.NounImg} alt={`YOLO Noun`}/>
-    
+	<img src={imgSrc} className={classes.NounImg} alt={`YOLO Noun`} data-tip data-for="noun-traits-show-modal"/>
     <p className={classes.Footer}>
     	If you were YOLOing this Noun could've been yours!
     </p>
@@ -107,6 +112,7 @@ const ShowNounModal: React.FC<{}> = props => {
   return (
     <div className={classes.ModalWrapper}>
       {showConnectModal && <Modal content={yoloNounContent} onDismiss={hideModalHandler}/>}
+	  {Boolean(imgParts?.length) && <NounTraitsOverlay parts={imgParts!} toolTipId="noun-traits-show-modal" />}      
     </div>
   )
 };

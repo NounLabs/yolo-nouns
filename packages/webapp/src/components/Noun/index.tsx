@@ -7,6 +7,8 @@ import { default as config } from '../../config';
 
 import { ImageData, getNounSeedFromBlockHash, getNounData } from '@nouns/assets';
 import { buildSVG } from '@nouns/sdk';
+import NounTraitsOverlay from '../NounTraitsOverlay';
+
 const { palette } = ImageData;
 
 const hardPause = config.hardPause;
@@ -16,7 +18,7 @@ function getNounImage(nounId: number, blockhash: string){
   const { parts, background } = getNounData(seed);
 
   const svgBinary = buildSVG(parts, palette, background);
-  return {src: `data:image/svg+xml;base64,${btoa(svgBinary)}`, seed};
+  return {src: `data:image/svg+xml;base64,${btoa(svgBinary)}`, seed, parts};
 }
 
 const Noun: React.FC = props => {
@@ -32,13 +34,13 @@ const Noun: React.FC = props => {
 
     // Return the Loading Noun
     if (hardPause || !blockhash || !nextNounId || !ethereumConnected){
-      data.push({seed: {background: 0}, src: loadingNoun, alt: 'Loading Noun', nounId:''});
+      data.push({seed: {background: 0}, src: loadingNoun, alt: 'Loading Noun', nounId:'', parts: null});
       return data;
     }
 
     // Push the first Noun
-    const {src, seed} = getNounImage(nextNounId, blockhash)
-    data.push({seed, src, alt: `Noun ${nextNounId}`})
+    const {src, seed, parts} = getNounImage(nextNounId, blockhash)
+    data.push({seed, src, alt: `Noun ${nextNounId}`, parts})
 
     // Every 10th Noun, push another Noun
     /*
@@ -48,7 +50,7 @@ const Noun: React.FC = props => {
     }
     */
 
-    return data
+    return data;
 
   }, [nextNounId, blockhash, ethereumConnected]);
 
@@ -59,19 +61,20 @@ const Noun: React.FC = props => {
   },[dispatch, nounImageData])
 
 
-  const Imgs = nounImageData.map( ({src, alt}, i) => {
+  const Imgs = nounImageData.map( ({src, alt, parts}, i) => {
     let imgWrapper = [classes.imgWrapper]
 
 
     if (nounImageData.length > 1) imgWrapper.push(classes[`noun-${i+1}`])
 
     return (
-      <div className={`${imgWrapper.join(' ')}`}>
+      <div className={`${imgWrapper.join(' ')}`} data-tip data-for="noun-traits">
         <img
           className={classes.img}
           src={src}
           alt={alt}
         />
+        {Boolean(parts?.length) && <NounTraitsOverlay parts={parts!} toolTipId="noun-traits" />}
         <div className={classes.nounId}>Noun {nextNounId + i}</div>
       </div>
       )
