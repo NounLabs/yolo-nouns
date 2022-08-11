@@ -1,0 +1,110 @@
+.navArrowsContainer {
+  /*position: absolute;*/
+	margin-bottom: 5px;
+}
+
+h3 {
+	display: inline;
+    font-size: x-large;
+    font-weight: normal !important;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: 'Londrina Solid';
+    vertical-align: bottom;
+    /*margin-top: 8px;*/
+}
+
+.leftArrowCool {
+  -webkit-appearance: none;
+  padding: 0 !important;
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-size: large;
+  border-radius: 50% !important;
+  color: var(--brand-cool-dark-text);
+  /*background-color: var(--brand-cool-accent);*/
+  font-weight: bold;
+  min-height: auto !important
+}
+
+.rightArrowCool {
+  -webkit-appearance: none;
+  padding: 0 !important;
+  margin-left: 0.3rem;
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-size: large;
+  color: var(--brand-cool-dark-text);
+  /*background-color: var(--brand-cool-accent);*/
+  border-radius: 50% !important;
+  font-weight: bold;
+  min-height: auto !important
+}
+
+.leftArrowWarm {
+  -webkit-appearance: none;
+  padding: 0;
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-size: large;
+  border-radius: 50%;
+  color: var(--brand-warm-dark-text);
+  background-color: var(--brand-warm-accent);
+  font-weight: bold;
+}
+
+.rightArrowWarm {
+  -webkit-appearance: none;
+  padding: 0;
+  margin-left: 0.3rem;
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-size: large;
+  color: var(--brand-warm-dark-text);
+  background-color: var(--brand-warm-accent);
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+/* Disable hover on mobile because it was leading to
+buttons looking disabled when they were not */
+@media (min-width: 992px) {
+  .leftArrowWarm:hover,
+  .leftArrowCool:hover,
+  .rightArrowWarm:hover,
+  .rightArrowCool:hover {
+    opacity: 0.9;
+    background-color: var(--brand-gray-hover);
+  }
+}
+
+.leftArrowWarm:disabled,
+.leftArrowCool:disabled,
+.rightArrowWarm:disabled,
+.rightArrowCool:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@-moz-document url-prefix() {
+  .navArrowsContainer {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+}

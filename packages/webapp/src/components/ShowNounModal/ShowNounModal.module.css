@@ -11,15 +11,9 @@
 }
 
 .Footer {
-    margin-top: 6px;
-    margin-bottom: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     font-size: 18px;
-}
-
-h3 {
-    font-size: x-large;
-    font-weight: bold;
-    /*margin-top: 8px;*/
 }
 
 .twitterBtn {
