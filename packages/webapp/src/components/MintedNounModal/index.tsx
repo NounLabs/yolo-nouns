@@ -90,13 +90,11 @@ const MintedNounModal: React.FC<{}> = props => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastMintedBlockNumber, lastAttemptedNextNounId, dispatch]);
 
-
-
   const title = 'YOLO! You minted a Noun!';
   const yoloNounContent = (
     <>
     <Confetti active={showConfetti} config={confettiConfig}/>
-    <h3>{title}</h3>
+    <h3 style={{ display: 'block'}}>{title}</h3>
     <img src={imgSrc} className={classes.NounImg} alt={`Minted Noun`}/>
     <p className={classes.Footer}>
     	See another one you like? Keep YOLOing!
