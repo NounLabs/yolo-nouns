@@ -67,7 +67,7 @@ const MintBar:React.FC<{}> = (props) => {
 		      ${(!votingActive || activeAuction === undefined) ? classes.VoteBarOverlay : ''}
 		      ${classes.VoteBar}`}
 		    >
-		      { (voteSocketConnected && ethereumSocketConnected) ? voteOpts(false)
+		      { (/*voteSocketConnected && */ethereumSocketConnected) ? voteOpts(false)
 		        : !ethereumSocketConnected ? reconnectOpt
 		        : voteReconnectOpt }
 		    </div>  	
